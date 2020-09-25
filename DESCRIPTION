@@ -1,0 +1,25 @@
+Package: CrobustaTFs
+Title: Candidate transcription factor binding sites in Ciona robusta.
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Keira",
+           family = "Wiechecki",
+           role = c("aut", "cre"),
+           email = "kaw504@nyu.edu",
+           comment = c(ORCID = "0000-0003-0572-6284"))
+Description: A data set of candidate transcription factor binding sites for Ciona robusta. It includes experimentally validated peaks in C. robusta, inferred binding sites from Cis-BP, and orthologs with known motifs from other organisms.
+License: `use_gpl3_license()`
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: 
+    DBI,
+    motifmatchr,
+    TFBSTools,
+    R (>= 2.10)
+Imports:
+    DBI,
+    motifmatchr,
+    TFBSTools
+release_date: 2020
