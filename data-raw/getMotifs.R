@@ -159,7 +159,7 @@ mergeMotifs <- function(){
 	khToMotif <- rbind(
 	  cbind(ID=names(selex.pwm),KHID=name(selex.pwm)),
 	  setNames(khToHomer[,c("ID","GeneID")],c("ID","KHID")),
-	  setNames(khToCisbp[,c("Motif_ID","KHID")],c('ID',"KHID")),
+	  setNames(khToCisbp[,c("Motif_ID","GeneID")],c('ID',"KHID")),
 	  stringsAsFactors=F
 	)
 
