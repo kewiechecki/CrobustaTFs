@@ -3,9 +3,9 @@
 \docType{data}
 \name{CrobustaMotifs}
 \alias{CrobustaMotifs}
-\title{PWMs for 1487 potential TF binding sites.}
+\title{PWMs for 3162 potential TF binding sites.}
 \format{
-A PWMatrixList of 1487 elements.
+A PWMatrixList of 3162 elements.
 \describe{
 \item{Matrix()}{The position weight matrix}
 \item{names()}{The unique name of each PWM.}

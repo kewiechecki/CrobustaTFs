@@ -72,7 +72,7 @@ khToName <- function(x,gene.names){
   return(x)
 }
 
-nameMotifs <- function(motifs,gene.names,khid.sub=F){
+nameMotifs <- function(motifs, gene.names, kh.ky, khid.sub=F){
   require(TFBSTools)
   tf.family <- sapply(tags(motifs),'[[',"Family_Name")
   tf.family[grep("(Gata|Zn?F)",tf.family,T)] <- "Zinc finger"
@@ -93,13 +93,20 @@ nameMotifs <- function(motifs,gene.names,khid.sub=F){
   tf.family[tf.family=="E2F/TDP"] <- "E2F"
   tf.family[tf.family=="Homeobox"] <- "Homeodomain"
   
-  tf.tags <- mapply(function(x,y){
-    x$Family_Name <- y
-    return(x)
-  },tags(motifs),tf.family)
-  
   tf.name <- sapply(tags(motifs),'[[',"DBID.1")
   tf.kh <- names(motifs)
+
+  tf.khid <- strsplit(tf.kh, ';')
+  tf.kyid <- lapply(tf.khid, function(x) setNames(kh.ky$KYID,kh.ky$KHID)[x])
+  tf.kyid <- lapply(tf.kyid,function(x) x[!duplicated(x)])
+  tf.kyid <- lapply(tf.kyid, paste0, collapse=';')
+  
+  tf.tags <- mapply(function(tag, fam, khid, kyid){
+    tag$Family_Name <- fam
+    tag$KHID <- khid
+    tag$KYID <- kyid
+    return(tag)
+  },tags(motifs), tf.family, tf.kh, tf.kyid)
   
   tf.kh.gene <- strsplit(tf.kh,';')
   tf.kh.gene <- lapply(tf.kh.gene,khToName,gene.names)
@@ -176,6 +183,14 @@ mergeMotifs <- function(){
 	# We add these association to the output and remove all TFs present in the output 
 	# from the input.
 	motifs <- reduceMotifs(comb.pwm,khToMotif)
-	motifs <- nameMotifs(motifs,geneid)
+
+	# get KH-to-KY table
+	kh.ky <- read.table('KH2012_KY2019.txt',stringsAsFactors = F)
+	names(kh.ky) <- c('KHID',"KYID")
+	kh.ky$KHID <- paste0("KH2013:",kh.ky$KHID)
+	kh.ky$KYID <- paste0("KY2019:",kh.ky$KYID)
+
+	motifs <- nameMotifs(motifs, geneid, kh.ky)
+
 	return(motifs)
 }

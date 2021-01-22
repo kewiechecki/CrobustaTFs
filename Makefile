@@ -27,4 +27,4 @@ data-raw/$(ENSEMBL):
 
 clean:
 	rm -f $(ZIP)
-	rm -f build
+	rm -rf build

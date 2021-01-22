@@ -1,8 +1,8 @@
-#' PWMs for 1487 potential TF binding sites.
+#' PWMs for 3162 potential TF binding sites.
 #'
 #' A list of binding sites from ANISEED, Cis-BP, and HOMER corresponding to C. robusta transcription factors. The same TF may have multiple motifs if it is present in multiple databases.
 #' 
-#' @format A PWMatrixList of 1487 elements.
+#' @format A PWMatrixList of 3162 elements.
 #' \describe{
 #' 	\item{Matrix()}{The position weight matrix}
 #'	\item{names()}{The unique name of each PWM.}

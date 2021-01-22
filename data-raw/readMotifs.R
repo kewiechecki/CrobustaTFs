@@ -57,7 +57,7 @@ getSelex <- function(dname='Selex_seq_Cirobu_All'){
       list,
       Family_Name=selex$Family.Classification,
       DBID.1=selex$Primary.gene.name,
-      MoreArgs = list(Motif_Type="ANISEED",strand="*"),
+      MoreArgs = list(Source="ANISEED",strand="*"),
       SIMPLIFY = F
     )
   )
@@ -95,7 +95,7 @@ getHomerMotifs <- function(homerdat='known.motifs'){
         ID=ID,
         name=ID,
         profileMatrix = profileMatrix,
-        tags = list(Family_Name=Family_Name,DBID.1=DBID.1,Motif_Type="HOMER")
+        tags = list(Family_Name=Family_Name,DBID.1=DBID.1,Source="HOMER")
       ))
     }
   ))
@@ -129,6 +129,8 @@ getCisbpMotifs <- function(cisbp="CisBP/Ciona_intestinalis_2020_11_12/",promoter
   motifdat <- read.delim(
     paste0(cisbp,'/TF_Information_all_motifs_plus.txt'),
     stringsAsFactors = F)
+  motifdat$Source <- "CisBP"
+
   addmotif <- motifid[!motifid%in%motifdat$Motif_ID]
   sapply(addmotif, function(x) {
     motifdat[x,c('Motif_ID',"DBID.1",'Family_Name')] <<- x
