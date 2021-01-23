@@ -1,6 +1,6 @@
 Package: CrobustaTFs
 Title: Candidate transcription factor binding sites in Ciona robusta.
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Keira",
            family = "Wiechecki",
@@ -14,9 +14,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10),
+    TFBSTools
 Imports:
     DBI,
     motifmatchr,
-    TFBSTools
 release_date: 2020

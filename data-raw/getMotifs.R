@@ -19,9 +19,9 @@ disambigMotifs <- function(x,y,res=NULL){
 }
 
 reduceMotifs <- function(motifs,geneToMotif){
-  require(TFBSTools)
-  require(motifmatchr)
-  require(DBI)
+#  require(TFBSTools)
+#  require(motifmatchr)
+#  require(DBI)
   reduced <- Reduce(
     disambigMotifs,
     1:max(sapply(split(geneToMotif$KHID,geneToMotif$ID),length)),
