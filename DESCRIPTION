@@ -18,5 +18,5 @@ Depends:
     TFBSTools
 Imports:
     DBI,
-    motifmatchr,
+    motifmatchr
 release_date: 2020
