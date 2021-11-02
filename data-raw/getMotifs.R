@@ -72,6 +72,17 @@ khToName <- function(x,gene.names){
   return(x)
 }
 
+
+#' Calculates mean Shannon entropy of a PWM.
+#' @param motif A \code{\link{PWMatrix}}.
+#' @return The Shannon entropy value of the PWM.
+#' @export
+#' @import TFBSTools
+meanEntropy <- function(motif){
+	require(TFBSTools)
+	mean(apply(Matrix(motif),2,shannon.entropy))
+}
+
 nameMotifs <- function(motifs, gene.names, kh.ky, khid.sub=F){
   require(TFBSTools)
   tf.family <- sapply(tags(motifs),'[[',"Family_Name")
@@ -101,12 +112,15 @@ nameMotifs <- function(motifs, gene.names, kh.ky, khid.sub=F){
   tf.kyid <- lapply(tf.kyid,function(x) x[!duplicated(x)])
   tf.kyid <- lapply(tf.kyid, paste0, collapse=';')
   
-  tf.tags <- mapply(function(tag, fam, khid, kyid){
+  tf.entropy <- lapply(motifs, meanEntropy)
+
+  tf.tags <- mapply(function(tag, fam, khid, kyid, entropy){
     tag$Family_Name <- fam
     tag$KHID <- khid
     tag$KYID <- kyid
+    tag$meanEntropy <- entropy
     return(tag)
-  },tags(motifs), tf.family, tf.kh, tf.kyid)
+  },tags(motifs), tf.family, tf.kh, tf.kyid, tf.entropy)
   
   tf.kh.gene <- strsplit(tf.kh,';')
   tf.kh.gene <- lapply(tf.kh.gene,khToName,gene.names)
@@ -149,7 +163,8 @@ mergeMotifs <- function(){
 	# read PWMs
 	selex.pwm <- getSelex()
 	homer.pwm <- getHomerMotifs()
-	cisbp.pwm <- getCisbpMotifs()
+	cisbp.pwm <- getCisbpMotifs("CisBP/Cintestinalis2.00",promoters=NULL,version='2.00')
+	cisbp1.02 <- getCisbpMotifs("CisBP/Cintestinalis1.02",promoters=NULL,version='1.02')
 
 	# read motif-to-gene matches
 	khToHomer <- read.delim('homer_orthologs.txt',stringsAsFactors=F,header=T)
@@ -160,7 +175,7 @@ mergeMotifs <- function(){
 	names(selex.pwm)[sel] <- paste0(names(selex.pwm)[sel],"ANISEED")
 
 	# append motifs
-	comb.pwm <- Reduce(append,list(selex.pwm,homer.pwm,cisbp.pwm))
+	comb.pwm <- Reduce(append,list(selex.pwm,homer.pwm,cisbp.pwm,cisbp1.02))
 
 	# motif-to-KHID table
 	khToMotif <- rbind(

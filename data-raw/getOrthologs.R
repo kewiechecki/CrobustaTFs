@@ -17,7 +17,9 @@ ensembl.gene <- data.frame(ensembl_transcript_id=ensembl[,1],GeneID=sub('.v.*','
 ensembl.gene <- merge(ensembl.gene,transcriptToGene,'ensembl_transcript_id')
 ensembl.gene <- ensembl.gene[!duplicated(ensembl.gene[,-1]),-1]
 
-cisbp.geneid <- read.delim('CisBP/Ciona_intestinalis_2020_11_12/TF_Information_all_motifs_plus.txt',stringsAsFactors = F)
+cisbp2 <- read.delim('CisBP/Cintestinalis2.00/TF_Information_all_motifs_plus.txt',stringsAsFactors = F)
+cisbp1.02 <- read.delim('CisBP/Cintestinalis1.02/TF_Information_all_motifs_plus.txt',stringsAsFactors = F)
+cisbp.geneid <- merge(cisbp2,cisbp1.02,all.x=T,all.y=T)
 cisbp.geneid <- merge(cisbp.geneid,ensembl.gene,by.x='DBID',by.y='ensembl_gene_id')
 cisbp.geneid$GeneID <- sub("KH2012","KH2013",cisbp.geneid$GeneID)
 

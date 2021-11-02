@@ -106,7 +106,7 @@ getHomerMotifs <- function(homerdat='known.motifs'){
 getCisbpMotifs <- function(cisbp="CisBP/Ciona_intestinalis_2020_11_12/",promoters=c(
   "BREd","BREu","DCEI-DCEIII","DPE","DRE","E-box","Inr_fly","Inr_human",
   "ohler","Pause_button",'TATA-box',"TCT","XCPE","MTE"
-)){
+), version=''){
   require(TFBSTools)
   motifs <- lapply(
     list.files(
@@ -129,7 +129,7 @@ getCisbpMotifs <- function(cisbp="CisBP/Ciona_intestinalis_2020_11_12/",promoter
   motifdat <- read.delim(
     paste0(cisbp,'/TF_Information_all_motifs_plus.txt'),
     stringsAsFactors = F)
-  motifdat$Source <- "CisBP"
+  motifdat$Source <- paste0("CisBP",version)
 
   addmotif <- motifid[!motifid%in%motifdat$Motif_ID]
   sapply(addmotif, function(x) {
