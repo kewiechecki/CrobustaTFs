@@ -14,10 +14,10 @@ build: data
 	cp DESCRIPTION build
 	cp NAMESPACE build
 
-data: data-raw/cisbp_orthology.txt
+data: data-raw/cisbp_orthologs.txt
 	Rscript --vanilla data-raw/DATASET.R
 
-data-raw/cisbp_orthology.txt: data-raw/$(ENSEMBL)
+data-raw/cisbp_orthologs.txt: data-raw/$(ENSEMBL)
 	Rscript --vanilla data-raw/getOrthologs.R
 
 data-raw/$(ENSEMBL):
