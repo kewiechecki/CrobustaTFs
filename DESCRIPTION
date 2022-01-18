@@ -1,6 +1,6 @@
 Package: CrobustaTFs
 Title: Candidate transcription factor binding sites in Ciona robusta.
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: 
     person(given = "Keira",
            family = "Wiechecki",
