@@ -1,5 +1,5 @@
 # CrobustaTFs
-An R package containing candidate *Ciona robusta* motifs developed for use with [ATAC-seq data](https://doi.org/10.7554/eLife.49921). It integrates motifs identified using [SELEX-seq] (https://doi.org/10.1007/978-1-4939-9624-7_23) with known orthologs from [HOMER] (http://homer.ucsd.edu/homer/index.html) and inferred orthologs from [Cis-BP] (doi: 10.1016/j.cell.2014.08.009). The install script attempts to retrieve all source files and runs a Gale-Shapley-like algorithm to map candidate motifs to genes with minimal ambiguity
+An R package containing candidate *Ciona robusta* motifs developed for use with [ATAC-seq data](https://doi.org/10.7554/eLife.49921). It integrates motifs identified using [SELEX-seq](https://doi.org/10.1007/978-1-4939-9624-7_23) with known orthologs from [HOMER](http://homer.ucsd.edu/homer/index.html) and inferred orthologs from [Cis-BP](doi: 10.1016/j.cell.2014.08.009). The install script attempts to retrieve all source files and runs a Gale-Shapley-like algorithm to map candidate motifs to genes with minimal ambiguity
 
 # Rationale
 Motifs in *C. robusta* are much less well characterized than *H. sapiens* or *M. musculus*. The most common techniques to fill in the gaps use either orthologs from other chordates or to infer orthologs from protein DNA binding domains. 
