@@ -20,10 +20,12 @@ data: data-raw/cisbp_orthologs.txt
 data-raw/cisbp_orthologs.txt: data-raw/$(ENSEMBL)
 	Rscript --vanilla data-raw/getOrthologs.R
 
-data-raw/$(ENSEMBL):
-	wget $(URL)
+data-raw/$(ENSEMBL): $(ZIP)
 	unzip -o $(ZIP)
 	mv $(ENSEMBL) data-raw
+
+$(ZIP):
+	wget --no-check-certificate $(URL)
 
 clean:
 	rm -f $(ZIP)
