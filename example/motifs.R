@@ -1,7 +1,8 @@
 library(CrobustaTFs)
-library(tfenrichr)
-library(Biostrings)
+# this example uses background nucleotide sequences from https://github.com/ChristiaenLab/BSgenome.Crobusta.HT.KY
 library(BSgenome.Crobusta.HT.KY)
+
+library(Biostrings)
 library(TFBSTools)
 library(purrr)
 
