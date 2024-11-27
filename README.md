@@ -1,14 +1,14 @@
 # CrobustaTFs
 An R package containing candidate *Ciona robusta* motifs developed for use with [ATAC-seq data](https://doi.org/10.7554/eLife.49921). It integrates motifs identified using [SELEX-seq](https://doi.org/10.1007/978-1-4939-9624-7_23) with known orthologs from [HOMER](http://homer.ucsd.edu/homer/index.html) and inferred orthologs from [Cis-BP](doi: 10.1016/j.cell.2014.08.009). The install script attempts to retrieve all source files and runs a Gale-Shapley-like algorithm to map candidate motifs to genes with minimal ambiguity
 
-# Rationale
+## Rationale
 Motifs in *C. robusta* are much less well characterized than *H. sapiens* or *M. musculus*. The most common techniques to fill in the gaps use either orthologs from other chordates or to infer orthologs from protein DNA binding domains. 
 These methods naturally raise the question of which motif is "best." The answer often comes down to experimenter judgment, and different sources may yield more useful motifs for different TFs. 
 The problem is particularly pronounced with inferred orthologs, as there are often many-to-many relationships between motifs and TFs.
 It is often desirable to be able to unambiguously assign a motif to a singe TF. This is done by iteratively removing associations of ambiguous motifs to TFs that are already unambiguously associated to a motif.
 This package aims to simplify mapping motifs to TFs in *C. robusta* by unifying possible sources into a single database.
 
-# Installation
+## Installation
 Depends: 
     R (>= 2.10),
     TFBSTools
@@ -16,12 +16,13 @@ Depends:
 Imports:
     DBI,
     motifmatchr
-```
+```bash
+git clone https://github.com/kewiechecki/CrobustaTFs
 cd CrobustaMotifs
 make
 ```
 
-# Usage
+## Usage
 ```{R}
 library(CrobustaMotifs)
 
