@@ -2,9 +2,11 @@ ENSEMBL = KH-ENS.blast
 ZIP = 'index.html?file=data%2Fcirobu%2FKH-ENS.blast.zip'
 URL = https://www.aniseed.cnrs.fr/aniseed/download/?file=data%2Fcirobu%2FKH-ENS.blast.zip
 
-install: build
-	R CMD build build
+install: CrobustaTFs_0.0.3.tar.gz
 	R CMD INSTALL build
+
+CrobustaTFs_0.0.3.tar.gz: build
+	R CMD build build
 
 build: data
 	mkdir -p build
@@ -20,13 +22,10 @@ data: data-raw/cisbp_orthologs.txt
 data-raw/cisbp_orthologs.txt: data-raw/$(ENSEMBL)
 	Rscript --vanilla data-raw/getOrthologs.R
 
-data-raw/$(ENSEMBL): $(ZIP)
-	unzip -o $(ZIP)
-	mv $(ENSEMBL) data-raw
-
-$(ZIP):
-	wget --no-check-certificate $(URL)
+$(ENSEMBL).zip:
+	curl --insecure --output data-raw/$(ENSEMBL).zip $(URL)
+	unzip -o data-raw/$(ENSEMBL).zip
 
 clean:
-	rm -f $(ZIP)
+	rm -f data-raw/$(ENSEMBL).zip*
 	rm -rf build
